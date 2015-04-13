@@ -17,38 +17,15 @@ usage:
 	echo " upgrade        - upgrade installation of makeR"
 	echo " uninstall      - uninstall makeR"
 
-clean:
-	echo  "Cleaning up ..."
-	${DELETE} src/*.o src/*.so *.tar.gz
-	${DELETE} *.Rcheck
-	${DELETE} .RData .Rhistory
+
+
+## Helper targers
 
 git:
 	test "$$(git status --porcelain | wc -c)" = "0"
 
 master: git
 	test $$(git rev-parse --abbrev-ref HEAD) = "master"
-
-inst/web:
-	git branch gh-pages origin/gh-pages || true
-	git clone --branch gh-pages . inst/web
-
-gh-pages-build: staticdocs
-	cd inst/web && git fetch && git merge --no-edit origin/master --strategy ours && git add . && git commit --amend --no-edit && git push -f origin gh-pages
-
-gh-pages-push:
-	git push origin gh-pages
-
-rd: git
-	Rscript -e "library(methods); devtools::document()"
-	git add man/ NAMESPACE
-	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "document"
-
-inst/NEWS.Rd: git NEWS.md
-	Rscript -e "tools:::news2Rd('$(word 2,$^)', '$@')"
-	sed -r -i 's/`([^`]+)`/\\code{\1}/g' $@
-	git add $@
-	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "update NEWS.Rd"
 
 tag:
 	(echo Release v$$(sed -n -r '/^Version: / {s/.* ([0-9.-]+)$$/\1/;p}' DESCRIPTION); echo; sed -n '/^===/,/^===/{:a;N;/\n===/!ba;p;q}' NEWS.md | head -n -3 | tail -n +3) | git tag -a -F /dev/stdin v$$(sed -n -r '/^Version: / {s/.* ([0-9.-]+)$$/\1/;p}' DESCRIPTION)
@@ -66,11 +43,43 @@ bump-desc: master rd
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "add suffix -0.0 to version"
 	crant -u 4 -C
 
+
+## Cleanup
+
+clean:
+	echo  "Cleaning up ..."
+	${DELETE} src/*.o src/*.so *.tar.gz
+	${DELETE} *.Rcheck
+	${DELETE} .RData .Rhistory
+
+
+
+## Tagging
+
 bump-cran: bump-cran-desc inst/NEWS.Rd tag
 
 bump-gh: bump-gh-desc inst/NEWS.Rd tag
 
 bump: bump-desc inst/NEWS.Rd tag
+
+
+
+## Documentation
+
+rd: git
+	Rscript -e "library(methods); devtools::document()"
+	git add man/ NAMESPACE
+	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "document"
+
+inst/NEWS.Rd: git NEWS.md
+	Rscript -e "tools:::news2Rd('$(word 2,$^)', '$@')"
+	sed -r -i 's/`([^`]+)`/\\code{\1}/g' $@
+	git add $@
+	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "update NEWS.Rd"
+
+
+
+## Testing
 
 install:
 	Rscript -e "sessionInfo()"
@@ -87,11 +96,41 @@ covr:
 lintr:
 	Rscript -e 'if (!requireNamespace("lintr")) devtools::install_github("jimhester/lintr"); lintr::lint_package()'
 
+check-rev-dep:
+	echo "Running reverse dependency checks for CRAN ..."
+	${RSCRIPT} ./makeR/check-rev-dep
+
+check-rd-files: rd
+	echo "Checking RDs one by one ..."
+	${RSCRIPT} ./makeR/check-rd-files
+
+winbuilder: rd
+	echo "Building via winbuilder"
+	${RSCRIPT} ./makeR/winbuilder
+
+
+
+# staticdocs
+
+inst/web:
+	git branch gh-pages origin/gh-pages || true
+	git clone --branch gh-pages . inst/web
+
 staticdocs: inst/web
 	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
 
+gh-pages-build: staticdocs
+	cd inst/web && git fetch && git merge --no-edit origin/master --strategy ours && git add . && git commit --amend --no-edit && git push -f origin gh-pages
+
+gh-pages-push:
+	git push origin gh-pages
+
 view-docs:
 	chromium-browser inst/web/index.html
+
+
+
+## wercker
 
 wercker-build:
 	wercker build --docker-host=unix://var/run/docker.sock --no-remove
@@ -99,17 +138,9 @@ wercker-build:
 wercker-deploy:
 	wercker deploy --docker-host=unix://var/run/docker.sock --no-remove
 
-check-rev-dep: install
-	echo "Running reverse dependency checks for CRAN ..."
-	${RSCRIPT} ./makeR/check-rev-dep
 
-check-rd-files: install
-	echo "Checking RDs one by one ..."
-	${RSCRIPT} ./makeR/check-rd-files
 
-winbuilder: roxygenize
-	echo "Building via winbuilder"
-	${RSCRIPT} ./makeR/winbuilder
+## Maintenance
 
 upgrade: git master
 	echo "Upgrading makeR"
