@@ -23,6 +23,7 @@ usage:
 	echo " check-rev-dep  - Run a reverse dependency check against packages on CRAN"
 	echo " check-rd-files - Run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
 	echo " winbuilder     - Ask for email and build on winbuilder"
+	echo " gh-pages-init  - Initialize orphan gh-pages branch"
 	echo " staticdocs     - Build staticdocs in inst/web"
 	echo " gh-pages-build - Populate gh-pages branch with staticdocs"
 	echo " gh-pages-push  - Push gh-pages branch to GitHub Pages"
@@ -35,7 +36,7 @@ usage:
 
 ## Script targers
 
-init-staticdocs git-is-clean branch-is-master:
+git-is-clean branch-is-master gh-pages-init init-staticdocs:
 	sh ./makeR/$@
 
 
@@ -136,6 +137,8 @@ winbuilder: rd
 
 
 # staticdocs
+
+gh-pages-init:
 
 init-staticdocs:
 
