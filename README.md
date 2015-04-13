@@ -17,6 +17,7 @@ curl http://krlmlr.github.io/makeR/install | sh -s ../makeR
 curl http://krlmlr.github.io/makeR/install | sh -s krlmlr
 ```
 
+If you're unsure, use the first variant.
 The second variant installs from a local Git clone of this project (here, `../makeR`);
 for the third variant (read-write access to GitHub), `krlmlr` is your GitHub user name.
 Take a look at [the installer script](https://github.com/krlmlr/makeR/blob/gh-pages/install) if you're curious.
