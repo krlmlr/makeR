@@ -6,7 +6,6 @@ VERSION := $(shell Rscript ./makeR/get-pkg-version)
 TARGZ   := $(PKGNAME)_$(VERSION).tar.gz
 
 .SILENT:
-.PHONEY: clean roxygenize package windows install dependencies test check
 
 usage:
 	echo "Available targets:"
