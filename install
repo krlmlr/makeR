@@ -4,12 +4,16 @@ set -e
 set -x
 
 if [ "$1" = "" ]; then
-  git submodule add https://github.com/krlmlr/makeR.git makeR
+  submodule="https://github.com/krlmlr/makeR.git"
 elif [ -d "$1" -a -d "$1/.git" -a -f "$1/Makefile" ]; then
-  git submodule add $1 makeR
+  submodule="$1"
 else
-  git submodule add git@github.com:$1/makeR.git makeR
+  submodule="git@github.com:$1/makeR.git"
 fi
+
+rm -rf .git/modules/makeR
+git submodule add "$submodule" makeR
+
 echo "-include makeR/Makefile" > Makefile
 echo /Makefile >> .Rbuildignore
 echo /makeR >> .Rbuildignore
