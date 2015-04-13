@@ -13,7 +13,7 @@ fi
 
 git submodule add "$submodule" makeR
 
-cp makeR/Makefile.tmpl Makefile
+ln -s makeR/Makefile.tmpl Makefile
 
 echo /Makefile >> .Rbuildignore
 echo /makeR >> .Rbuildignore
