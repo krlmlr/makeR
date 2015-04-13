@@ -33,10 +33,14 @@ usage:
 	echo " uninstall      - uninstall makeR"
 
 
-## Helper targers
+## Script targers
 
-git-is-clean:
-	test "$$(git status --porcelain | wc -c)" = "0"
+init-staticdocs git-is-clean:
+	sh ./makeR/$@
+
+
+
+## Helper targers
 
 master: git-is-clean
 	test $$(git rev-parse --abbrev-ref HEAD) = "master"
@@ -133,7 +137,6 @@ winbuilder: rd
 # staticdocs
 
 init-staticdocs:
-	sh ./makeR/$@
 
 staticdocs: inst/web
 	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
