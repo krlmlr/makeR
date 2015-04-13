@@ -11,12 +11,25 @@ usage:
 	echo "Available targets:"
 	echo ""
 	echo " clean          - Clean everything up"
-	echo " check-rev-dep  - run a reverse dependency check against packages on CRAN"
-	echo " check-rd-files - run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
-	echo " winbuilder     - ask for email and build on winbuilder"
+	echo " bump-cran      - Bump second digit of version (0.1 -> 0.2) and tag"
+	echo " bump-gh        - Bump third digit of version (0.1.2 -> 0.1.3) and tag"
+	echo " bump           - Bump fourth digit of version (0.1.2.3 -> 0.1.2.4) and tag"
+	echo " rd             - Create documentation via roxygen2"
+	echo " install        - Install dependencies"
+	echo " test           - Run tests"
+	echo " covr           - Check coverage"
+	echo " lintr          - Run lintr"
+	echo " check-rev-dep  - Run a reverse dependency check against packages on CRAN"
+	echo " check-rd-files - Run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
+	echo " winbuilder     - Ask for email and build on winbuilder"
+	echo " staticdocs     - Build staticdocs in inst/web"
+	echo " gh-pages-build - Populate gh-pages branch with staticdocs"
+	echo " gh-pages-push  - Push gh-pages branch to GitHub Pages"
+	echo " view-docs      - View staticdocs locally"
+	echo " wercker-build  - Run wercker build for local instance of docker"
+	echo " wercker-deploy - Run wercker deploy for local instance of docker"
 	echo " upgrade        - upgrade installation of makeR"
 	echo " uninstall      - uninstall makeR"
-
 
 
 ## Helper targers
@@ -42,6 +55,17 @@ bump-desc: master rd
 	git add DESCRIPTION
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "add suffix -0.0 to version"
 	crant -u 4 -C
+
+inst/NEWS.Rd: git NEWS.md
+	Rscript -e "tools:::news2Rd('$(word 2,$^)', '$@')"
+	sed -r -i 's/`([^`]+)`/\\code{\1}/g' $@
+	git add $@
+	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "update NEWS.Rd"
+
+inst/web:
+	git branch gh-pages origin/gh-pages || true
+	git clone --branch gh-pages . inst/web
+
 
 
 ## Cleanup
@@ -70,12 +94,6 @@ rd: git
 	Rscript -e "library(methods); devtools::document()"
 	git add man/ NAMESPACE
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "document"
-
-inst/NEWS.Rd: git NEWS.md
-	Rscript -e "tools:::news2Rd('$(word 2,$^)', '$@')"
-	sed -r -i 's/`([^`]+)`/\\code{\1}/g' $@
-	git add $@
-	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "update NEWS.Rd"
 
 
 
@@ -111,10 +129,6 @@ winbuilder: rd
 
 
 # staticdocs
-
-inst/web:
-	git branch gh-pages origin/gh-pages || true
-	git clone --branch gh-pages . inst/web
 
 staticdocs: inst/web
 	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
