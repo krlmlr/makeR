@@ -5,7 +5,7 @@ set -e
 mkdir -p inst
 git clone . inst/web
 cd inst/web
-git branch --orphan gh-pages
+git checkout --orphan gh-pages
 git reset --hard
 git commit -m "initial" --allow-empty
 git push origin gh-pages
