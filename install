@@ -4,6 +4,8 @@ set -e
 
 if [ "$1" = "" ]; then
   git submodule add https://github.com/krlmlr/makeR.git makeR
+elif [ -d "$1" -a -d "$1/.git" -a -f "$1/Makefile" ]; then
+  git submodule add $1 makeR
 else
   git submodule add git@github.com:$1/makeR.git makeR
 fi
