@@ -1,7 +1,12 @@
 #!/bin/sh
 
-git submodule add https://github.com/krlmlr/makeR.git makeR
-#git submodule add git@github.com:krlmlr/makeR.git makeR
+set -e
+
+if [ "$1" = "" ]; then
+  git submodule add https://github.com/krlmlr/makeR.git makeR
+else
+  git submodule add git@github.com:$1/makeR.git makeR
+fi
 echo "-include makeR/Makefile" > Makefile
 echo /Makefile >> .Rbuildignore
 echo /makeR >> .Rbuildignore
