@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+git submodule init
+git submodule update
+cd makeR
+git checkout master
+git pull
+cd ..
+

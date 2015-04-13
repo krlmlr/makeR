@@ -21,6 +21,7 @@ usage:
 	echo " check-rev-dep  - run a reverse dependency check against packages on CRAN"
 	echo " check-rd-files - run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
 	echo " winbuilder     - ask for email and build on winbuilder"
+	echo " .upgrade       - upgrade makeR"
 
 clean:
 	echo  "Cleaning up ..."
@@ -63,3 +64,6 @@ winbuilder: roxygenize
 	echo "Building via winbuilder"
 	${RSCRIPT} ./makeR/winbuilder
 
+.upgrade:
+	echo "Upgrading makeR"
+	./makeR/upgrade
