@@ -12,16 +12,11 @@ usage:
 	echo "Available targets:"
 	echo ""
 	echo " clean          - Clean everything up"
-	echo " roxygenize     - roxygenize in-place"
-	echo " package        - build source package"
-	echo " install        - install the package"
-	echo " dependencies   - install package dependencies, including suggests"
-	echo " test           - run unit tests"
-	echo " check          - run R CMD check on the package"
 	echo " check-rev-dep  - run a reverse dependency check against packages on CRAN"
 	echo " check-rd-files - run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
 	echo " winbuilder     - ask for email and build on winbuilder"
 	echo " upgrade        - upgrade installation of makeR"
+	echo " uninstall      - uninstall makeR"
 
 clean:
 	echo  "Cleaning up ..."
@@ -104,29 +99,6 @@ wercker-build:
 
 wercker-deploy:
 	wercker deploy --docker-host=unix://var/run/docker.sock --no-remove
-
-roxygenize: clean
-	echo "Roxygenizing package ..."
-	${RSCRIPT} ./makeR/roxygenize
-
-package: roxygenize
-	echo "Building package file $(TARGZ)"
-	${R} CMD build .
-
-install: package
-	echo "Installing package $(TARGZ)"
-	${R} CMD INSTALL --install-tests $(TARGZ)
-
-test: install
-	echo "Testing package $(TARGZ)"
-	${RSCRIPT} ./test_all.R
-
-check: package
-	echo "Running R CMD check ..."
-	${R} CMD check $(TARGZ)
-
-dependencies:
-	${RSCRIPT} ./makeR/dependencies
 
 check-rev-dep: install
 	echo "Running reverse dependency checks for CRAN ..."
