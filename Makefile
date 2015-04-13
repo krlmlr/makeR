@@ -36,7 +36,7 @@ usage:
 
 ## Script targers
 
-git-is-clean branch-is-master gh-pages-init init-staticdocs postinstall:
+git-is-clean branch-is-master gh-pages-init init-staticdocs gh-pages-build postinstall:
 	sh ./makeR/$@
 
 
@@ -146,7 +146,6 @@ staticdocs: inst/web
 	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
 
 gh-pages-build: staticdocs
-	cd inst/web && git fetch && git merge --no-edit origin/master --strategy ours && git add . && git commit --amend --no-edit && git push -f origin gh-pages
 
 gh-pages-push:
 	git push origin gh-pages
