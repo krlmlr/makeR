@@ -5,7 +5,7 @@ set -e
 rm -f Makefile
 cp makeR/Makefile.tmpl Makefile
 
-echo "^/Makefile$" >> .Rbuildignore
-echo "^/makeR" >> .Rbuildignore
+echo "^Makefile$" >> .Rbuildignore
+echo "^makeR" >> .Rbuildignore
 git add Makefile .Rbuildignore
 git commit -m "install makeR from $(cd makeR; git config remote.origin.url)"
