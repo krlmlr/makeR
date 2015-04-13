@@ -8,4 +8,5 @@ cd makeR
 git checkout master
 git pull
 cd ..
-
+git add makeR
+git commit -m "upgrade makeR"
