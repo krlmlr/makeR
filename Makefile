@@ -16,6 +16,7 @@ usage:
 	echo " bump           - Bump fourth digit of version (0.1.2.3 -> 0.1.2.4) and tag"
 	echo " rd             - Create documentation via roxygen2"
 	echo " install        - Install dependencies"
+	echo " dependencies   "
 	echo " test           - Run tests"
 	echo " covr           - Check coverage"
 	echo " lintr          - Run lintr"
@@ -100,7 +101,7 @@ rd: git
 
 ## Testing
 
-install:
+install dependencies:
 	Rscript -e "sessionInfo()"
 	Rscript -e "devtools::install_github('hadley/testthat')"
 	Rscript -e "options(repos = 'http://cran.rstudio.com'); devtools::install_deps(dependencies = TRUE)"
