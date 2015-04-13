@@ -1,0 +1,10 @@
+#!/bin/sh
+
+set -e
+
+git submodule deinit makeR
+git rm -r makeR
+git rm -f Makefile
+
+git commit -m "uninstall makeR"
+echo "makeR successfully uninstalled. Please clean up .Rbuildignore as necessary." >> /dev/stderr
