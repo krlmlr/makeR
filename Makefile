@@ -35,26 +35,27 @@ usage:
 
 ## Script targers
 
-init-staticdocs git-is-clean:
+init-staticdocs git-is-clean branch-is-master:
 	sh ./makeR/$@
 
 
 
 ## Helper targers
 
-master: git-is-clean
-	test $$(git rev-parse --abbrev-ref HEAD) = "master"
+git-is-clean:
+
+branch-is-master: git-is-clean
 
 tag:
 	(echo Release v$$(sed -n -r '/^Version: / {s/.* ([0-9.-]+)$$/\1/;p}' DESCRIPTION); echo; sed -n '/^===/,/^===/{:a;N;/\n===/!ba;p;q}' NEWS.md | head -n -3 | tail -n +3) | git tag -a -F /dev/stdin v$$(sed -n -r '/^Version: / {s/.* ([0-9.-]+)$$/\1/;p}' DESCRIPTION)
 
-bump-cran-desc: master rd
+bump-cran-desc: branch-is-master rd
 	crant -u 2 -C
 
-bump-gh-desc: master rd
+bump-gh-desc: branch-is-master rd
 	crant -u 3 -C
 
-bump-desc: master rd
+bump-desc: branch-is-master rd
 	test "$$(git status --porcelain | wc -c)" = "0"
 	sed -i -r '/^Version: / s/( [0-9.]+)$$/\1-0.0/' DESCRIPTION
 	git add DESCRIPTION
@@ -164,10 +165,10 @@ wercker-deploy:
 
 ## Maintenance
 
-upgrade: master
+upgrade: branch-is-master
 	echo "Upgrading makeR"
 	sh ./makeR/upgrade
 
-uninstall: master
+uninstall: branch-is-master
 	echo "Uninstalling makeR"
 	sh ./makeR/uninstall
