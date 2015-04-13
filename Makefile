@@ -89,7 +89,7 @@ lintr:
 	Rscript -e 'if (!requireNamespace("lintr")) devtools::install_github("jimhester/lintr"); lintr::lint_package()'
 
 staticdocs: inst/web
-	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs@crayon-colors"); staticdocs::build_site()'
+	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
 
 view-docs:
 	chromium-browser inst/web/index.html
