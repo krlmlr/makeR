@@ -12,6 +12,4 @@ else
 fi
 
 git submodule add "$submodule" makeR
-
-export submodule
 sh ./makeR/postinstall
