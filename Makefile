@@ -36,7 +36,7 @@ usage:
 
 ## Script targers
 
-git-is-clean branch-is-master gh-pages-init init-staticdocs:
+git-is-clean branch-is-master gh-pages-init init-staticdocs postinstall:
 	sh ./makeR/$@
 
 
@@ -167,6 +167,8 @@ wercker-deploy:
 
 
 ## Maintenance
+
+postinstall: branch-is-master
 
 upgrade: branch-is-master
 	echo "Upgrading makeR"
