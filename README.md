@@ -7,7 +7,19 @@ This is a git submodule we include in our R packages to have a Makefile and some
 The submodule is always included under the path 'makeR' in the respective package repositories, e.g., look here:
 https://github.com/berndbischl/BBmisc
 
-As using git submodules is harder than it should be, we document the two operations you need now:
+### Installing the submodule
+
+Execute this in a terminal:
+
+```
+git submodule add https://github.com/krlmlr/makeR.git makeR
+#git submodule add git@github.com:krlmlr/makeR.git makeR
+echo "-include makeR/Makefile" > Makefile
+echo /Makefile >> .Rbuildignore
+echo /makeR >> .Rbuildignore
+git add Makefile .Rbuildignore
+git commit -m "install makeR"
+```
 
 ### Initially cloning the submodule
 
