@@ -131,6 +131,9 @@ winbuilder: rd
 
 # staticdocs
 
+init-staticdocs:
+	sh ./makeR/$@
+
 staticdocs: inst/web
 	Rscript -e 'if (!requireNamespace("staticdocs")) devtools::install_github("gaborcsardi/staticdocs"); staticdocs::build_site()'
 
