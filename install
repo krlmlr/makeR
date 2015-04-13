@@ -1,6 +1,7 @@
 #!/bin/sh
 
 set -e
+set -x
 
 if [ "$1" = "" ]; then
   git submodule add https://github.com/krlmlr/makeR.git makeR
