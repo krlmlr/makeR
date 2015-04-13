@@ -78,10 +78,6 @@ bump-gh: bump-gh-desc inst/NEWS.Rd tag
 
 bump: bump-desc inst/NEWS.Rd tag
 
-bootstrap_snap:
-	curl -L https://raw.githubusercontent.com/krlmlr/r-snap-texlive/master/install.sh | sh
-	curl -L https://raw.githubusercontent.com/krlmlr/r-snap/master/install.sh | sh
-
 install:
 	Rscript -e "sessionInfo()"
 	Rscript -e "devtools::install_github('hadley/testthat')"
