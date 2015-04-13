@@ -8,5 +8,6 @@ cd makeR
 git checkout master
 git pull
 cd ..
+if sh ./makeR/git-is-clean; then exit 0; fi
 git add makeR
 git commit -m "upgrade makeR"
