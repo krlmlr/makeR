@@ -9,19 +9,16 @@ https://github.com/berndbischl/BBmisc
 
 ### Installing the submodule
 
-Execute this in a terminal:
+Execute **one** of the following in a terminal:
 
 ```
 curl http://krlmlr.github.io/makeR/install | sh
-```
-
-For installing with read-write access, use e.g.
-
-```
+curl http://krlmlr.github.io/makeR/install | sh -s ../makeR
 curl http://krlmlr.github.io/makeR/install | sh -s krlmlr
 ```
 
-where `krlmlr` is your GitHub user name.
+The second variant installs from a local Git clone of this project (here, `../makeR`);
+for the third variant (read-write access to GitHub), `krlmlr` is your GitHub user name.
 
 
 ### Initially cloning the submodule
