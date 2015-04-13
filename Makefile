@@ -114,8 +114,8 @@ winbuilder: roxygenize
 
 upgrade: git master
 	echo "Upgrading makeR"
-	./makeR/upgrade
+	sh ./makeR/upgrade
 
 uninstall: git master
 	echo "Uninstalling makeR"
-	./makeR/uninstall
+	sh ./makeR/uninstall
