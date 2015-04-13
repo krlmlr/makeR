@@ -12,14 +12,17 @@ https://github.com/berndbischl/BBmisc
 Execute this in a terminal:
 
 ```
-git submodule add https://github.com/krlmlr/makeR.git makeR
-#git submodule add git@github.com:krlmlr/makeR.git makeR
-echo "-include makeR/Makefile" > Makefile
-echo /Makefile >> .Rbuildignore
-echo /makeR >> .Rbuildignore
-git add Makefile .Rbuildignore
-git commit -m "install makeR"
+curl http://krlmlr.github.io/makeR/install | sh
 ```
+
+For installing with read-write access, use e.g.
+
+```
+curl http://krlmlr.github.io/makeR/install | sh -s krlmlr
+```
+
+where `krlmlr` is your GitHub user name.
+
 
 ### Initially cloning the submodule
 
