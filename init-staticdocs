@@ -5,5 +5,5 @@ set -e
 mkdir -p inst/staticdocs
 cd inst/staticdocs
 touch index.R
-git add inst/staticdocs/index.R
+git add index.R
 git commit -m "init staticdocs"
