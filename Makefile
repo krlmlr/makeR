@@ -63,6 +63,7 @@ inst/NEWS.Rd: git NEWS.md
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "update NEWS.Rd"
 
 inst/web:
+	mkdir -p inst
 	git branch gh-pages origin/gh-pages || true
 	git clone --branch gh-pages . inst/web
 
