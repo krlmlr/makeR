@@ -35,10 +35,10 @@ usage:
 
 ## Helper targers
 
-git:
+git-is-clean:
 	test "$$(git status --porcelain | wc -c)" = "0"
 
-master: git
+master: git-is-clean
 	test $$(git rev-parse --abbrev-ref HEAD) = "master"
 
 tag:
@@ -57,7 +57,7 @@ bump-desc: master rd
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "add suffix -0.0 to version"
 	crant -u 4 -C
 
-inst/NEWS.Rd: git NEWS.md
+inst/NEWS.Rd: git-is-clean NEWS.md
 	Rscript -e "tools:::news2Rd('$(word 2,$^)', '$@')"
 	sed -r -i 's/`([^`]+)`/\\code{\1}/g' $@
 	git add $@
@@ -92,7 +92,7 @@ bump: bump-desc inst/NEWS.Rd tag
 
 ## Documentation
 
-rd: git
+rd: git-is-clean
 	Rscript -e "library(methods); devtools::document()"
 	git add man/ NAMESPACE
 	test "$$(git status --porcelain | wc -c)" = "0" || git commit -m "document"
@@ -161,10 +161,10 @@ wercker-deploy:
 
 ## Maintenance
 
-upgrade: git master
+upgrade: master
 	echo "Upgrading makeR"
 	sh ./makeR/upgrade
 
-uninstall: git master
+uninstall: master
 	echo "Uninstalling makeR"
 	sh ./makeR/uninstall
