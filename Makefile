@@ -107,7 +107,9 @@ rd: git-is-clean
 
 ## Testing
 
-install dependencies:
+dependencies-hook:
+
+install dependencies: dependencies-hook
 	Rscript -e "sessionInfo()"
 	Rscript -e "devtools::install_github('hadley/testthat')"
 	Rscript -e "options(repos = 'http://cran.rstudio.com'); devtools::install_deps(dependencies = TRUE)"
