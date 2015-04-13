@@ -37,20 +37,11 @@ while in bash in the main, top-level directory of the respective package repo.
 
 ### Updating makeR
 
-If we update the makeR tool chain, somebody has to update the submodule for the package repo once as well. 
-IT IS VERY LIKELY THAT THIS PERSON IS ME OR MICHEL AND NOT YOU. YOU PROBABLY DO NOT HAVE TO DO ANYTHING. 
-It works like this: 
+If you want to update the makeR tool chain, run: 
 
 ```
-git submodule init
-git submodule update
-cd makeR
-git checkout master
-git pull
-cd ..
+make upgrade
 ```
-
-Theen add, commit and push the makeR directory. We can all agree that this sucks.
 
 ### More info
 
