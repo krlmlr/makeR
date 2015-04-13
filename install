@@ -14,10 +14,8 @@ fi
 rm -rf .git/modules/makeR
 git submodule add "$submodule" makeR
 
-echo "-include makeR/Makefile
+cp makeR/Makefile.tmpl Makefile
 
-init:
-	git submodule update --init" > Makefile
 echo /Makefile >> .Rbuildignore
 echo /makeR >> .Rbuildignore
 git add Makefile .Rbuildignore
