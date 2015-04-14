@@ -17,6 +17,7 @@ usage:
 	echo " rd             - Create documentation via roxygen2"
 	echo " install        - Install dependencies"
 	echo " dependencies   "
+	echo " dt_*           - Run devtools verb"
 	echo " test           - Run tests"
 	echo " covr           - Check coverage"
 	echo " lintr          - Run lintr"
@@ -39,6 +40,14 @@ usage:
 
 git-is-clean branch-is-master init-gh-pages init-staticdocs gh-pages-build postinstall init-wercker:
 	sh ./makeR/$@
+
+
+
+## devtools targets:
+dt_use_testthat:
+
+dt_%:
+	Rscript -e "devtools::$(subst dt_,,$@)()"
 
 
 
