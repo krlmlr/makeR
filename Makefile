@@ -23,11 +23,12 @@ usage:
 	echo " check-rev-dep  - Run a reverse dependency check against packages on CRAN"
 	echo " check-rd-files - Run Rd2pdf on each doc file to track hard-to-spot doc/latex errors"
 	echo " winbuilder     - Ask for email and build on winbuilder"
-	echo " gh-pages-init  - Initialize orphan gh-pages branch"
+	echo " init-gh-pages  - Initialize orphan gh-pages branch"
 	echo " staticdocs     - Build staticdocs in inst/web"
 	echo " gh-pages-build - Populate gh-pages branch with staticdocs"
 	echo " gh-pages-push  - Push gh-pages branch to GitHub Pages"
 	echo " view-docs      - View staticdocs locally"
+	echo " init-wercker   - Install a default wercker.yml"
 	echo " wercker-build  - Run wercker build for local instance of docker"
 	echo " wercker-deploy - Run wercker deploy for local instance of docker"
 	echo " upgrade        - upgrade installation of makeR"
@@ -36,7 +37,7 @@ usage:
 
 ## Script targers
 
-git-is-clean branch-is-master gh-pages-init init-staticdocs gh-pages-build postinstall:
+git-is-clean branch-is-master init-gh-pages init-staticdocs gh-pages-build postinstall init-wercker:
 	sh ./makeR/$@
 
 
@@ -158,6 +159,8 @@ view-docs:
 
 
 ## wercker
+
+init-wercker: branch-is-master
 
 wercker-build:
 	wercker build --docker-host=unix://var/run/docker.sock --no-remove
