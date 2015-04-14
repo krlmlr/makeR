@@ -46,8 +46,10 @@ git-is-clean branch-is-master init-gh-pages init-staticdocs gh-pages-build posti
 ## devtools targets:
 dt_use_testthat:
 
-dt_%:
+dt_%: branch-is-master
 	Rscript -e "devtools::$(subst dt_,,$@)()"
+	git add .
+	git commit -m "$(subst dt_,,$@)"
 
 
 
