@@ -7,6 +7,8 @@ TARGZ   := $(PKGNAME)_$(VERSION).tar.gz
 
 .SILENT:
 
+.FORCE:
+
 usage:
 	echo "Available targets:"
 	echo ""
