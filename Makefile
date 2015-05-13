@@ -168,6 +168,9 @@ gh-pages-build: staticdocs
 gh-pages-push:
 	git push origin gh-pages
 
+view-html-vignettes:
+	chromium-browser inst/doc/*.html
+
 view-docs:
 	chromium-browser inst/web/index.html
 
