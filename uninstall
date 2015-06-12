@@ -2,7 +2,6 @@
 
 set -e
 
-git submodule deinit makeR
 git rm -r makeR
 git rm -f Makefile
 
