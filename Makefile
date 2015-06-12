@@ -131,7 +131,7 @@ install dependencies: dependencies-hook
 	Rscript -e "options(repos = c(CRAN = 'http://cran.rstudio.com')); devtools::install_deps(dependencies = TRUE)"
 
 test:
-	Rscript -e "devtools::check(document = FALSE, check_dir = '.', cleanup = FALSE)"
+	Rscript -e "devtools::check(document = TRUE, check_dir = '.', cleanup = FALSE)"
 	! egrep -A 5 "ERROR|WARNING|NOTE" *.Rcheck/00check.log
 
 covr:
