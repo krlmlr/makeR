@@ -9,4 +9,4 @@ echo "^Makefile$" >> .Rbuildignore
 echo "^Makefile\.in$" >> .Rbuildignore
 echo "^makeR$" >> .Rbuildignore
 git add Makefile .Rbuildignore
-git commit -m "install makeR from $(cd makeR; git config remote.origin.url)"
+git commit -m "install makeR as subtree"

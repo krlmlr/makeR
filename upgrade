@@ -2,12 +2,7 @@
 
 set -e
 
-git submodule init
-git submodule update
-cd makeR
-git checkout master
-git pull
-cd ..
-if sh ./makeR/git-is-clean; then exit 0; fi
-git add makeR
-git commit -m "upgrade makeR"
+subtree="https://github.com/krlmlr/makeR.git"
+
+git subtree pull --prefix makeR "$submodule" master2 --squash
+sh ./makeR/postinstall

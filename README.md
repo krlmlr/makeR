@@ -12,15 +12,10 @@ https://github.com/berndbischl/BBmisc
 Execute **one** of the following in a terminal:
 
 ```
-curl http://krlmlr.github.io/makeR/install | sh
-curl http://krlmlr.github.io/makeR/install | sh -s ../makeR
-curl http://krlmlr.github.io/makeR/install | sh -s krlmlr
+curl http://krlmlr.github.io/makeR/install2 | sh
 ```
 
-If you're unsure, use the first variant.
-The second variant installs from a local Git clone of this project (here, `../makeR`);
-for the third variant (read-write access to GitHub), `krlmlr` is your GitHub user name.
-Take a look at [the installer script](https://github.com/krlmlr/makeR/blob/gh-pages/install) if you're curious.
+Take a look at [the installer script](https://github.com/krlmlr/makeR/blob/gh-pages/install2) if you're curious.
 
 
 ### Initially cloning the submodule
