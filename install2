@@ -1,0 +1,9 @@
+#!/bin/sh
+
+set -e
+set -x
+
+subtree="https://github.com/krlmlr/makeR.git"
+
+git subtree add --prefix makeR "$submodule" master --squash
+sh ./makeR/postinstall
