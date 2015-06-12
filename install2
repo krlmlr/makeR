@@ -5,5 +5,5 @@ set -x
 
 subtree="https://github.com/krlmlr/makeR.git"
 
-git subtree add --prefix makeR "$submodule" master2 --squash
+git subtree add --prefix makeR "$subtree" master2 --squash
 sh ./makeR/postinstall
