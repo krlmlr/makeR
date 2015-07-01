@@ -9,7 +9,7 @@ https://github.com/berndbischl/BBmisc
 
 ### Upgrading
 
-The installation method has switched from submodules to subtrees. To upgrade an existing installation, please run `make uninistall` first; you may also want to remove the `.gitmodules` file if you do not use other submodules.
+The installation method has switched from submodules to subtrees. To upgrade an existing submodule-based installation, please run `make uninistall` first; you may also want to remove the `.gitmodules` file if you do not use other submodules. After switching, you can run `make upgrade` as usual for further upgrades.
 
 
 ### Installing the subtree
