@@ -198,3 +198,9 @@ upgrade: git-is-clean
 uninstall: git-is-clean
 	echo "Uninstalling makeR"
 	sh ./makeR/uninstall
+
+
+## Obsolete
+
+init:
+	true
