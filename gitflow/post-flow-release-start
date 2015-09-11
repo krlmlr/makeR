@@ -9,7 +9,7 @@ version <- gsub("^.*/([^/]*)$", "\\1", branch_name)
 package_version(version)
 desc <- read.dcf("DESCRIPTION")
 desc[, "Version"] <- version
-date <- Sys.Date()
+date <- as.character(Sys.Date())
 desc[, "Date"] <- date
 write.dcf(desc, "DESCRIPTION")
 git2r::add(repo, "DESCRIPTION")
