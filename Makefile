@@ -127,7 +127,7 @@ dependencies-hook:
 
 install dependencies: dependencies-hook
 	Rscript -e "sessionInfo()"
-	Rscript -e "options(repos = c(CRAN = 'http://cran.rstudio.com')); devtools::install_deps(dependencies = TRUE)"
+	Rscript -e "options(repos = c(CRAN = 'http://cran.rstudio.com')); devtools::install_deps(dependencies = TRUE, upgrade = FALSE)"
 
 test:
 	Rscript -e "devtools::check(document = TRUE, check_dir = '.', cleanup = FALSE)"
