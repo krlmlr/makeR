@@ -15,7 +15,7 @@ desc[, "Version"] <- version
 if ("Date" %in% colnames(desc)) {
   desc[, "Date"] <- date
 }
-write.dcf(desc, "DESCRIPTION")
+write.dcf(desc, "DESCRIPTION", keep.white = colnames(desc))
 
 devtools::document()
 git2r::add(repo, "DESCRIPTION")
