@@ -3,7 +3,8 @@ Title: Tools for Building and Releasing R Packages
 Version: 0.0-0
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description: The 'makeR' project wrapped as a package.
-Depends: R (>= 3.2.3)
+Depends:
+    R (>= 3.2.3)
 License: GPL-3
 LazyData: true
 Encoding: UTF-8
@@ -11,3 +12,4 @@ Date: 2016-02-03
 URL: http://krlmlr.github.io/makeR
 URLNote: https://github.com/krlmlr/makeR
 BugReports: https://github.com/krlmlr/makeR/issues
+RoxygenNote: 5.0.1
