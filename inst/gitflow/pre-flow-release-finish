@@ -18,6 +18,8 @@ BRANCH=$3
 
 # Implement your script here.
 
+sed '/^$/N;/\n$/q' NEWS.md | tail -n +3 | xclip -se c
+
 if ! git remote | grep ^origin | egrep -q "github[.]com"; then
   exit 0
 fi
