@@ -1,12 +1,12 @@
 Package: rflow
 Title: Tools for Building and Releasing R Packages
 Version: 0.0-0
+Date: 2016-02-03
 Authors@R: person("Kirill", "Müller", role = c("aut", "cre"), email = "krlmlr+r@mailbox.org")
 Description: The 'makeR' project wrapped as a package.
 License: GPL-3
 LazyData: true
 Encoding: UTF-8
-Date: 2016-02-03
 URL: http://krlmlr.github.io/makeR
 URLNote: https://github.com/krlmlr/makeR
 BugReports: https://github.com/krlmlr/makeR/issues
