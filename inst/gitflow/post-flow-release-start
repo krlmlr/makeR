@@ -3,6 +3,7 @@
 if (file.exists("R/aaa-autoroxy.R")) autoroxy::rox_on()
 
 library(magrittr)
+library(methods)
 
 repo <- git2r::repository()
 branch_name <- (git2r::branches(repo) %>% Filter(git2r::is_head, .) %>% "[["(1))@name
