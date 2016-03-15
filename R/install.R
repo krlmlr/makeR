@@ -1,5 +1,5 @@
 #' @export
-install_hooks <- function(pkg = ".") {
+install_hooks <- function(pkg = ".", overwrite = TRUE) {
   pkg <- devtools::as.package(pkg)
 
   hooks_path <- system.file("gitflow", package = PACKAGE_NAME)
@@ -7,6 +7,9 @@ install_hooks <- function(pkg = ".") {
   hooks_abs_files <- file.path(hooks_path, hooks_files)
 
   target_path <- file.path(pkg$path, ".git", "hooks")
+
+  if (overwrite)
+    unlink(file.path(target_path, hooks_files), force = TRUE)
 
   invisible(setNames(file.symlink(hooks_abs_files, target_path), hooks_files))
 }
