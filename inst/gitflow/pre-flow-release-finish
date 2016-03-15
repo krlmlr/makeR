@@ -18,7 +18,7 @@ BRANCH=$3
 
 # Implement your script here.
 
-sed '1,3D;/^$/N;/\n$/q' NEWS.md | xclip -se c
+sed '1,/^$/D;/^$/N;/\n$/q' NEWS.md | xclip -se c
 
 if ! git remote | grep ^origin | egrep -q "github[.]com"; then
   exit 0
