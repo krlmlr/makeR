@@ -11,6 +11,7 @@ install_hooks <- function(pkg = ".", overwrite = TRUE) {
   if (overwrite)
     unlink(file.path(target_path, hooks_files), force = TRUE)
 
+  message("Installed ", length(hooks_files), " hooks in ", target_path)
   invisible(setNames(file.symlink(hooks_abs_files, target_path), hooks_files))
 }
 
