@@ -11,12 +11,10 @@ version <- gsub("^.*/([^/]*)$", "\\1", branch_name)
 package_version(version)
 date <- as.character(Sys.Date())
 
-desc <- read.dcf("DESCRIPTION")
-desc[, "Version"] <- version
-if ("Date" %in% colnames(desc)) {
-  desc[, "Date"] <- date
-}
-write.dcf(desc, "DESCRIPTION")
+desc <- readLines("DESCRIPTION")
+desc <- gsub("^(Version: )(.*)$", paste0("\\1", version), desc)
+desc <- gsub("^(Date: )(.*)$", paste0("\\1", date), desc)
+writeLines(desc, "DESCRIPTION")
 
 devtools::document()
 git2r::add(repo, "DESCRIPTION")
