@@ -28,6 +28,6 @@ if (is.null(master)) {
 
   news <- character()
   try(news <- readLines("NEWS.md"))
-  news <- c(paste0("Version ", version, " (", date, ")"), "===", "", changes_since_master, "", "", news)
+  news <- c(paste0("# ", devtools::as.package(".")$pkg, " ", version, " (", date, ")"), "", changes_since_master, "", "", news)
   writeLines(news, "NEWS.md")
 }
