@@ -41,7 +41,7 @@ usage:
 ## Script targers
 
 git-is-clean branch-is-master init-gh-pages init-staticdocs gh-pages-build postinstall init-wercker:
-	sh ./makeR/$@
+	sh $(shell Rscript -e "cat(system.file(package='rflow'))" )/$@
 
 
 
