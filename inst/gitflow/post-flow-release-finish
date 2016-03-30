@@ -2,4 +2,4 @@
 
 devtools::install()
 system("git push --follow-tags", wait = TRUE)
-autoroxy::rox_off()
+if (file.exists("R/zzz-autoroxy.R")) autoroxy::rox_off()
