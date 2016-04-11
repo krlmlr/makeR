@@ -33,4 +33,6 @@ install_makefile <- function(pkg = ".", filename = "Makefile",
   }
 
   writeLines(text, file_path)
+
+  devtools::use_build_ignore("Makefile")
 }
